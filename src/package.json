@@ -10,6 +10,7 @@
     "email": "anoop26667@gmail.com"
   },
   "dependencies": {
-    "jsfm-starter": "~1.0.0"
+    "jsfm-starter": "~1.0.0",
+    "node-static": "~0.6.9"
   }
 }
