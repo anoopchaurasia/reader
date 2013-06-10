@@ -27,8 +27,8 @@
 	<script type="text/javascript" src="/jsfm.js"></script>
 	<script type="text/javascript" src="/thirdparty/farbtastic/farbtastic.js"></script>
 	<script>
-		fm.basedir = '/javascript';
-	    fm.Include("com.newReader.Reader");
+		fm.basedir = '/js';
+	    fm.Include("com.reader.Reader");
 	</script>
 	<style type="text/css">
 		.left-panel{
@@ -47,7 +47,7 @@
 	<div id="hidden"></div>
 	<div style="width: 100%; height: 100%;" id="main">
 		<div class="left-panel">
-			<div  fm-controller="com.newReader.source.Sources">
+			<div  fm-controller="com.reader.source.Sources">
 				<div fm-="repeat:for(var k in feedList)">
 					<div class="items">
 						<a fm-="{click: changeFeedSource(feedList[{{k}}].url)}"> {{feedList[k].name}} </a> 
@@ -63,7 +63,7 @@
 					 </form>
 				</div>
 			</div>
-			<div id="article-list" style="height: 100%; width: 100%;" fm-controller="com.newReader.article.Articles">
+			<div id="article-list" style="height: 100%; width: 100%;" fm-controller="com.reader.article.Articles">
 				<div class="item-item-cont" style="width: 100%; height: 100%;">
 					<h2 fm-="text:title"></h2>
 					<div class="vertical-news-container" fm-="repeat:for(var k in items)">
