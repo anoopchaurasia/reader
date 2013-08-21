@@ -1,0 +1,21 @@
+﻿<div id="article-list" style="height: 100%; width: 100%;">
+    <div class="item-item-cont" style="width: 100%; height: 100%;">
+        <h2 fm-="text:articles.title"></h2>
+        <div class="vertical-news-container" fm-="{directive:move,repeat:for(var k in articles.items)}">
+            <div fm-="{click:showArticle(articles.items[{{k}}].id) }" class="newsSnippet" style="height: 110px; width: 361px;">
+                <div class="brief-title">
+                    <h2 class="title">{{articles.items[k].title}}
+                    </h2>
+                </div>
+                <div fm-="{hide:!articles.items[{{k}}].thumbnail}" class="brief-image">
+                    <img src="{{articles.items[k].thumbnail}}">
+                </div>
+                <div class="brief-body">
+                    <p>
+                        {{articles.items[k].contentSnippet}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

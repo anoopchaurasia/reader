@@ -23,13 +23,6 @@ a {
 	lineHeight: 1.2em;
 }
 
-#main {
-	height: 605px;
-	position: relative;
-	margin: auto;
-	margin-top: 3px;
-}
-
 .parent {
 	padding: 4px;
 	border: 1px dotted transparent;
@@ -73,7 +66,7 @@ a {
 	color: black;
 	height: 40px;
 	left: 0;
-	position: absolute;
+	position: relative;
 	width: 100%;
 	z-index: 1001;
 }
