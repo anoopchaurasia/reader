@@ -1,5 +1,6 @@
 fm.Package("app");
 fm.Include("web");
+fm.Import("db.Test");
 fm.Class("Reader", "Base");
 app.Reader = function (base, me, Base){this.setMe=function(_me){me=_me;};
 	Static.main=function(){

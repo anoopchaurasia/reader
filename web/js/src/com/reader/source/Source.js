@@ -7,7 +7,7 @@ com.reader.source.Source = function (me, Articles) {
         this.url = obj.url;
         this.id = obj.id;
         this.name = obj.name;
-        this.img = obj.img;
+        this.thumbnail = obj.thumbnail;
     }
 
     this.getArticles = function(cb){

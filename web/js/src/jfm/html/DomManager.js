@@ -125,57 +125,72 @@ jfm.html.DomManager = function (base, me){this.setMe=function(_me){me=_me;};
             var name = classObj.getClass().toString();
             element = jQuery("[fm-controller='" + name + "']");
         }
-        base(element);
-        element.find("[fm-]").each(function(){
-            if($(this).parents('body').length === 0)return;
-            var str= this.getAttribute('fm-')
-                                    .replace(/^{|}$/g,"");
-            var a = str.split(":");
-            var obj = {}, key=a[0].replace(/\s/g,"");
-            for(var k =1; k < a.length - 1; k +=1){
-                obj[key]= createRelation(key, a[k].substring(0, a[k].lastIndexOf(",")), classObj, this);
-                key = a[k].substring( a[k].lastIndexOf(",")+1, a[k].length).replace(/\s/g,"");
-            }
-            obj[key]=createRelation(key, a[k], classObj, this);
-            obj.text && registerForChange( obj.text, this);
-            obj.hide && registerForChange( obj.hide, this);
-            obj.text && obj.text(this);
-            obj.option && obj.option(this);
-            obj.repeat && registerForChange( obj.repeat, this);
-            obj.repeat && obj.repeat(this);
-            obj.hide && obj.hide(this);
-            obj.click && $(this).click(obj.click);
-        });
-        element.find("input, select").each(function(){
-            var temp = getValue(this.name, classObj);
-            assignValue.call(this, temp[0][temp[1]] );
-            if(this.type=="text"){
-                $(this).on("keyup", function () {
-                    if(temp[0][temp[1]] != this.value){
-                        var old = temp[0][temp[1]] ;
-                        temp[0][temp[1]] = this.value;
-                        applyChange(temp[0], classObj, temp[1], this.value, old, this.name);
-                    }
-                });
-            }
-            else{
-                $(this).on("click change",function(){
-                    var newValue = this.value;
-                    if(this.type == "checkbox"){
-                        newValue = this.checked? this.value : undefined;
-                    }
-                    if(temp[0][temp[1]] != newValue){
-                        var old = temp[0][temp[1]] ;
-                        temp[0][temp[1]] = newValue;
-                        applyChange(temp[0], classObj, temp[1], this.value, old, this.name);
-                    }
-                });
-            }
-        });
+        //base(element);
+        var childNodes = element[0].childNodes, str;
+        for(var i=0, len = childNodes.length; i<len; i++){
+            switch(childNodes[i].nodeType){
+                case 1:{
+                    
+                    break;
+                }
+                case 3:{
 
-        element.find("[fm-text]").each(function(){
-            var v = this.getAttribute("fm-text");
-        });
+                    break;
+                }
+            }
+        }
+        // element[0].childNodes.each(function(){
+        //     if($(this).parents('body').length === 0)return;
+        //     var str= this.getAttribute('fm-');
+        //     if(!str)return;
+            
+        //     str = str.replace(/^{|}$/g,"");
+        //     var a = str.split(":");
+        //     var obj = {}, key=a[0].replace(/\s/g,"");
+        //     for(var k =1; k < a.length - 1; k +=1){
+        //         obj[key]= createRelation(key, a[k].substring(0, a[k].lastIndexOf(",")), classObj, this);
+        //         key = a[k].substring( a[k].lastIndexOf(",")+1, a[k].length).replace(/\s/g,"");
+        //     }
+        //     obj[key]=createRelation(key, a[k], classObj, this);
+        //     obj.text && registerForChange( obj.text, this);
+        //     obj.hide && registerForChange( obj.hide, this);
+        //     obj.text && obj.text(this);
+        //     obj.option && obj.option(this);
+        //     obj.repeat && registerForChange( obj.repeat, this);
+        //     obj.repeat && obj.repeat(this);
+        //     obj.hide && obj.hide(this);
+        //     obj.click && $(this).click(obj.click);
+        // });
+        // element.find("input, select").each(function(){
+        //     var temp = getValue(this.name, classObj);
+        //     assignValue.call(this, temp[0][temp[1]] );
+        //     if(this.type=="text"){
+        //         $(this).on("keyup", function () {
+        //             if(temp[0][temp[1]] != this.value){
+        //                 var old = temp[0][temp[1]] ;
+        //                 temp[0][temp[1]] = this.value;
+        //                 applyChange(temp[0], classObj, temp[1], this.value, old, this.name);
+        //             }
+        //         });
+        //     }
+        //     else{
+        //         $(this).on("click change",function(){
+        //             var newValue = this.value;
+        //             if(this.type == "checkbox"){
+        //                 newValue = this.checked? this.value : undefined;
+        //             }
+        //             if(temp[0][temp[1]] != newValue){
+        //                 var old = temp[0][temp[1]] ;
+        //                 temp[0][temp[1]] = newValue;
+        //                 applyChange(temp[0], classObj, temp[1], this.value, old, this.name);
+        //             }
+        //         });
+        //     }
+        // });
+
+        // element.find("[fm-text]").each(function(){
+        //     var v = this.getAttribute("fm-text");
+        // });
     }
 
     function assignValue( value ){

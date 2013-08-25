@@ -45,19 +45,24 @@
     <div style="width: 100%; height: 100%;" id="main">
         <div class="left-panel">
             <div fm-controller="com.reader.controller.SourceController">
+                <div>
+                    <img src="/img/home.jpg">
+                </div>
                 <div fm-="repeat:for(var k in sources.items)">
                     <div class="items">
-                        <a href="#/source/{{sources.items[k].id}}">{{sources.items[k].name}} </a>
+                        <a href="#/source/{{sources.items[k].id}}">
+                            <img width=20 src='/img/logos/{{sources.items[k].thumbnail}}' />
+                            <span fm-="hide:!showText">{{sources.items[k].name}}</span> 
+                        </a>
                     </div>
                 </div>
             </div>
             <br style="clear: both">
         </div>
         <div class="right-panel" id="dynamic">
-           
         </div>
         <div style="position:absolute;bottom:0;height: 40px;width:100%">
-            <div id="taskbar"  style="height: 40px;">
+            <div id="taskbar" fm-controller="com.reader.controller.ActionController"  style="height: 40px;">
                 <div class="home left-float">
                     <a id="home">
                         <img alt="" height="40" src="/img/home.jpg"></a>
@@ -66,28 +71,12 @@
                 <div class="controlers left-float">
                     <div>
                         <a fm-='{click:increaseFont()}' id="fontplus" class="plus">
-                            <img src="/img/plus-sign.jpg"><span fm-='text:settings.fontSize'></span>
-                        </a><a id="fontminus" class="minus">
+                            <img src="/img/plus-sign.jpg">
+                        </a><a fm-='{click:decreaseFont()}' id="fontminus" class="minus">
                             <img src="/img/minus-sign.jpg">
                         </a>
                         <br style="clear:both">
                     </div>
-                </div>
-                <div id="columnsInfo" style="display: none;">
-                    <span class="current"></span>/<span class="total"></span>
-                </div>
-                <div id="next">
-                    <img src="/img/next-off.gif">
-                </div>
-                <div id="prev">
-                    <img src="/img/previous-off.gif">
-                </div>
-                <div class="news-feed-select right-float">
-                    <div class="left-float" style="float: left">
-                        <a id="setting">
-                            <img height="35" src="/img/settings.jpg"></a>
-                    </div>
-                    <br style="clear:both">
                 </div>
                 <br style="clear:both">
             </div>

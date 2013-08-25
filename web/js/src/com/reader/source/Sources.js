@@ -7,32 +7,39 @@ com.reader.source.Sources = function (base, me, Source) {
         var data = [{
             id: 1,
 	        url : "http://feeds.mashable.com/Mashable",
-	        name : "Mashable"
+	        name : "Mashable",
+            thumbnail: "mashable.jpg"
         }, {
             id: 2,
 	        url : "http://feeds.feedburner.com/fakingnews",
 	        name : "Faking News",
+            thumbnail:"fakingnews.jpg"
         }, {
-            id: 3,
-	            url : "http://blogs.forbes.com/ewanspence/feed/",
-	            name : "Ewan Spence"
+            id: 1,
+            url : "http://www.theverge.com/rss/index.xml",
+            name : "The Verge",
+            thumbnail: "verge.jpg"
         }, {
             id: 4,
-	            url : "http://www.engadget.com/editor/brian-heater/rss.xml",
-	            name : "Engadget"
+            url : "http://www.engadget.com/editor/brian-heater/rss.xml",
+            name : "Engadget",
+            thumbnail: 'engadget.jpg'
         }, {
             id: 5,
-	            url : "http://feeds.feedburner.com/liveside",
-	            name : "liveside"
+            url : "http://feeds.feedburner.com/liveside",
+            name : "live side",
+            thumbnail: 'liveside.jpg'
         }, {
             id: 6,
-	            url : "http://feeds.slashgear.com/slashgear",
-	            name : "Slashgear"
+            url : "http://feeds.slashgear.com/slashgear",
+            name : "Slashgear",
+            thumbnail: 'slashgear.jpg'
         }, {
             id: 7,
-	            url : "http://feeds.feedburner.com/TechCrunch/",
-	            selected : true,
-	            name : "Tech Crunch"
+            url : "http://feeds.feedburner.com/TechCrunch/",
+            selected : true,
+            name : "Tech Crunch",
+            thumbnail: 'techcrunch.jpg'
 	    }];
 	    base(data, Source);
     }

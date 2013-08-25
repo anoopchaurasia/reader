@@ -7,8 +7,6 @@ fm.Class("Reader");
 com.reader.Reader = function (me, RegisterHash, SourceController, ActionController) {
     this.setMe = function (_me) { me = _me };
     Static.main = function () {
-	    var source = new SourceController();
-	    new ActionController();
 		new RegisterHash();
 	};
 }

@@ -14,7 +14,7 @@ Base = function (me){this.setMe=function(_me){me=_me;};
     };
 
     this.GET = function(req, resp){
-    	 console.log("GET");
+        console.log("GET");
         this.POST(req, resp);
     };
 };

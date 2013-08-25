@@ -6,19 +6,14 @@ body {
 	color: black;
 }
 
-p {
-	margin-bottom: 0px
-}
 
-a {
-	cursor: pointer;
-}
 
 .s {
 	overflow: hidden;
 	line-height: 1.2em;
 	margin: 5px;
 	height: 200px;
+	padding: 0 10px;
 	width: 290px;
 	lineHeight: 1.2em;
 }
@@ -35,29 +30,13 @@ a {
 	float: left;
 }
 
-#hidden {
-	display: none;
-}
-
-#container {
-	
-}
 
 .item-item-cont h2 {
 	margin: 5px 6px;
 }
 
-#container {
-	width: 100%
-}
 
-.controlers {
-	float: left;
-}
 
-.home {
-	float: left;
-}
 
 #taskbar {
 	background-color: white;
@@ -242,3 +221,16 @@ a {
 	padding: 8px 5px;
 	width: 200px;
 }
+
+.items img{
+	width: 26px;
+	margin-right: 5px;
+}
+
+.items a {
+	display: inline-block;
+	padding: 10px 0 0 10px;
+	vertical-align: top;
+	text-decoration: none;
+	width: 86%;
+	border: 1px solid #eee;

@@ -1,7 +1,7 @@
 fm.Package('lib');
-fm.Class("ChangeListener");
+fm.AbstractClass("ChangeListener");
 lib.ChangeListener = function (me) {
-
+	this.setMe = function (_me) { me = _me; };
 	var cbList = {};
 	this.onChange = function(name, cb){
 		cbList[name] = cbList[name] || [];
@@ -22,5 +22,9 @@ lib.ChangeListener = function (me) {
 			var index = cbList[name].indexOf(cb);
 			cbList[name].splice(index, 1);
 		}
+	};
+
+	this.ChangeListener = function(){
+		
 	};
 }

@@ -1,8 +1,9 @@
 fm.Package("com.reader.controller");
 fm.Import("com.reader.source.Sources");
+fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
-fm.Class("ArticleController", 'lib.ChangeListener');
-com.reader.controller.ArticleController = function ( me, Articles, Sources, FillContent) {
+fm.Class("ArticleController", 'com.reader.controller.MainController');
+com.reader.controller.ArticleController = function ( me, Articles, Sources, FillContent, Settings) {
     
  this.setMe = function (_me) { me = _me; };
 
@@ -11,28 +12,42 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
             me.article =articles.getById(parseInt(pathInfo.articleId) );
     	    cb();
             create(me.article.content);
-        } );
+            Settings.getInstance().onChange('fontSize', onFontChange);
+        });
+    };
+
+    function onFontChange(){
+        create(me.article.content);
     };
 
     this.onStop = function(){
         $(".left-panel")[0].scrollIntoView();
+        Settings.getInstance().remove('fontSize', onFontChange);
     };
 
     this.ArticleController = function  (lastState) {
         
     };
-
+    function getWidth(fs){
+        var w = jQuery(window).width() - 0, cw = fs*multi;
+        if( w < cw ){
+            return w;
+        }
+        return cw;
+    }
+    multi = 18;
     var setTimeOut;
     function create(data){
-        var f_size = 12; var articleContainer = $("#articleContainer");
-        var articalWidth = 300, margins= 0;
+        var articleContainer = $("#articleContainer").empty();
+        var articalWidth = getWidth(Settings.getInstance().fontSize), margins= 0;
+        articleContainer.css('fontSize', Settings.getInstance().fontSize);
         var trancatedLength = [ 0, 1 ];
         var htm = "<div class='parent selector'><div class='s'></div></div>";
         clearTimeout(setTimeOut);
         currentCoNumber = 1;
         var bodyHeight = window.innerHeight - articleContainer.offset().top - 10;
         var content = new FillContent(this.content);
-        var i = 0, columns=-1;
+        var i = 0;
         function recursive( ) {
             var removeHeight = margins + 50;
             if (trancatedLength[1] <= 0) {
@@ -41,7 +56,7 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
             }
             i++;
             var elem;
-            articleContainer.width((i - columns) * (articalWidth + margins));
+            articleContainer.width((i) * (articalWidth + 40));
             elem = $(htm).appendTo(articleContainer);
             elem.find("div.s").height(bodyHeight - removeHeight -10).width(articalWidth);
             trancatedLength = content.truncateWithHeight(elem.find("div.s"), trancatedLength[0], data);
