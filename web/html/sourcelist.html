@@ -2,11 +2,11 @@
     <div>
         <img src="/img/home.jpg">
     </div>
-    <div fm-="repeat:for(var k in sources.items)">
+    <div fm-repeat="k in sources.items">
         <div class="items">
-            <a href="#/source/{{sources.items[k].id}}">
-                <img width=20 src='/img/logos/{{sources.items[k].thumbnail}}' />
-                <span fm-="hide:!showText">{{sources.items[k].name}}</span> 
+            <a fm-href="#/source/{{k.id}}">
+                <img width=20 src='/img/logos/{{k.thumbnail}}' />
+                <span fm-="hide:!showText">{{k.name}}</span> 
             </a>
         </div>
     </div>

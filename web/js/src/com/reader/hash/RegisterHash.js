@@ -34,18 +34,10 @@ com.reader.hash.RegisterHash = function(base, me, DomManager, SourceController, 
 
 	function setTemplates(){
 		$("[fm-controller]").each(function(){
-			var a = $(this).clone();
 			var controller = fm.isExist(this.getAttribute('fm-controller'));
-			controller.setTemplate(a, controller);
+			controller.setTemplate(this, controller);
 			new DomManager( $(this), new controller());
 
-		});
-		var t;
-		$(window).resize(function(){
-			clearTimeout(t);
-			t = setTimeout(function() {
-				me.onUrlChange(currentConfig[0], currentConfig[1]);
-			}, 500);
 		});
 	}
 	var currentConfig;
@@ -60,7 +52,9 @@ com.reader.hash.RegisterHash = function(base, me, DomManager, SourceController, 
 	 		currentController = instance; 
 			instance.onStart(keyValue, function(){
 				$(url.container).html(template);
+				var t = Date.now();
 				new DomManager($(url.container), instance);
+				console.log(Date.now() - t);
 			});
 			return;
 	 	}

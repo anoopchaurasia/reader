@@ -6,34 +6,29 @@ fm.Class("ArticleController", 'com.reader.controller.MainController');
 com.reader.controller.ArticleController = function ( me, Articles, Sources, FillContent, Settings) {
     
  this.setMe = function (_me) { me = _me; };
-
+    var fontChange;
     this.onStart = function(pathInfo, cb){
         Sources.getInstance().getArticles( parseInt(pathInfo.sourceId), function(articles){
             me.article =articles.getById(parseInt(pathInfo.articleId) );
     	    cb();
             create(me.article.content);
-            Settings.getInstance().onChange('fontSize', onFontChange);
+            fontChange = Settings.getInstance().on('fontSize,window-resize', function(){
+                create(me.article.content);
+            });
         });
-    };
-
-    function onFontChange(){
-        create(me.article.content);
     };
 
     this.onStop = function(){
         $(".left-panel")[0].scrollIntoView();
-        Settings.getInstance().remove('fontSize', onFontChange);
+        fontChange && fontChange();
     };
 
     this.ArticleController = function  (lastState) {
         
     };
     function getWidth(fs){
-        var w = jQuery(window).width() - 0, cw = fs*multi;
-        if( w < cw ){
-            return w;
-        }
-        return cw;
+        var w = jQuery(window).width(), cw = fs*multi;
+        return Math.min(w, cw);
     }
     multi = 18;
     var setTimeOut;
@@ -69,7 +64,7 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
         var current;elem = $(elem);
         $(document).off('keydown').on('keydown', function(e){
             var elemets = elem.find(".selector");
-            current = current || elemets.eq(0);
+            current = current && current.filter(":visible").length && current || elemets.eq(0);
             current.removeClass('selected');
             switch(e.keyCode){
                 case 37:{

@@ -2,27 +2,28 @@ fm.Package('lib');
 fm.AbstractClass("ChangeListener");
 lib.ChangeListener = function (me) {
 	this.setMe = function (_me) { me = _me; };
-	var cbList = {};
-	this.onChange = function(name, cb){
-		cbList[name] = cbList[name] || [];
-		cbList[name].push(cb);
-	};
 
-	this.changed = function(name, old, new_val){
-		var list = cbList[name];
-		for(var i=0; list && i< list.length; i++){
-			list[i]( new_val, old );
+	this.callAll = function(name, value, old){
+		var arr = onList[name];
+		for (var i = 0; arr && i < arr.length; i++) {
+			arr[i](value, old, name);
 		};
-	};
+	}
 
-	this.remove = function(name, cb){
-		if(!cb){
-			cbList[name] = [];
-		}else{
-			var index = cbList[name].indexOf(cb);
-			cbList[name].splice(index, 1);
-		}
-	};
+	var onList = {};
+	this.on = function(name, fn){
+		var name = name.replace(/\s/g,"").split(",");
+		for (var i = 0; i < name.length; i++) {
+			onList[name[i]] = onList[name[i]] || [];
+			onList[name[i]].push(fn);
+		};
+		return function(){
+			for (var i = 0; i < name.length; i++) {
+				var k = onList[name[i]].indexOf(fn); 
+				onList[name[k]].splice(k, 1)
+			};
+		};
+	}
 
 	this.ChangeListener = function(){
 		

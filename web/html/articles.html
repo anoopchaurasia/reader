@@ -1,20 +1,18 @@
 ﻿<div id="article-list" style="height: 100%; width: 100%;">
     <div class="item-item-cont" style="width: 100%; height: 100%;">
-        <h2 fm-="text:articles.title"></h2>
-        <div style="width:{{articles.items.length*(width+20)}}px;">
-            <div style="width:100%" class="vertical-news-container" fm-="{directive:move,repeat:for(var k in articles.items)}">
-                <div fm-="{click:showArticle(articles.items[{{k}}].id) }" class="newsSnippet" style="width:{{height}}px; height: {{width}}px;">
+        <h2 fm-bind="articles.title"></h2>
+        <div fm-directive="move()" fm-style="width:articles.items.length/3*(315+20)">
+            <div  class="vertical-news-container" fm-repeat="item in articles.items">
+                <div fm-click="showArticle(item.id)" class="newsSnippet" >
                     <div class="brief-title">
-                        <h2 class="title">{{articles.items[k].title}}
+                        <h2 class="title" fm-bind="item.title">
                         </h2>
                     </div>
-                    <div fm-="{hide:!articles.items[{{k}}].thumbnail}" class="brief-image">
-                        <img src="{{articles.items[k].thumbnail}}">
+                    <div fm-hide="!item.thumbnail" class="brief-image">
+                        <img fm-src="{{item.thumbnail}}">
                     </div>
                     <div class="brief-body">
-                        <p>
-                            {{articles.items[k].contentSnippet}}
-                        </p>
+                        <p fm-bind="item.contentSnippet"></p>
                     </div>
                 </div>
             </div>

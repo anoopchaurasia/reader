@@ -11,9 +11,9 @@ com.reader.controller.ActionController = function (base, me, Sources, DomManager
     };
 
     this.increaseFont = function(){
-    	this.settings.set('fontSize', this. settings.fontSize + 2);
+    	this.settings.set('fontSize', this. settings.fontSize + 6);
     };
     this.decreaseFont = function(){
-        this.settings.set('fontSize', this. settings.fontSize - 2);
+        this.settings.set('fontSize', this. settings.fontSize - 6);
     };
 };

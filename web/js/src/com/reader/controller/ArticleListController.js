@@ -2,11 +2,10 @@ fm.Package("com.reader.controller");
 fm.Import("com.reader.article.Articles");
 fm.Import("com.reader.source.Sources");
 fm.Class("ArticleListController", 'com.reader.controller.MainController');
-com.reader.controller.ArticleListController = function ( me, Articles, Sources) {
-    
- this.setMe = function (_me) { me = _me; };
+com.reader.controller.ArticleListController = function ( me, Articles, Sources, ArticleController) {
+    this.setMe = function (_me) { me = _me; };
     this.onStart = function(pathInfo, cb){
-		Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
+        Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
             me.articles = articles;
             cb();
         });
@@ -16,7 +15,6 @@ com.reader.controller.ArticleListController = function ( me, Articles, Sources) 
     this.width = 150;
 
     this.onStop = function(){
-
     };
     
     this.showArticle = function (articleId) {
