@@ -12,6 +12,7 @@ jfm.html.DomManager = function (base, me){this.setMe=function(_me){me=_me;};
             var name = classObj.getClass().toString();
             element = jQuery("[fm-controller='" + name + "']");
         }
+        this.el = element;
         attributeInfo([element[0]], classObj);
     }
 

@@ -4,22 +4,28 @@ fm.Import( "jfm.html.DomManager");
 fm.Import("com.reader.setting.Settings");
 fm.Class("SourceController", 'com.reader.controller.MainController');
 com.reader.controller.SourceController = function (base, me, Sources, DomManager, Settings) {
+    'use strict';
     this.setMe = function (_me) { me = _me; };
-    var winDowResize;
+    var windowResize;
     this.SourceController = function () {
     	base();
-    	var minWidth = 150;
-    	me.hideText = window.innerWidth * 15/100 < minWidth;
+        me.settings = Settings.getInstance();
         me.sources = Sources.getInstance();
-        winDowResize = Settings.getInstance().on('window-resize', function(a, b){
-            if(a * 15/100 < minWidth ){
-                me.hideText = true;
-            }else{
-                me.hideText = false;
-            }
-            if( a* 15/100 < minWidth && b* 15/100 > minWidth || a* 15/100 > minWidth && b* 15/100 < minWidth){
-                me.callAll("change", 'hideText');
-            }
+        setValues();
+        windowResize = me.settings.on('window-resize', function(){
+            setValues();
+            me.callAll("change");
         });
+    };
+
+    function setValues(){
+        me.hideText = window.innerWidth * 15/100 < 150;
+    }
+
+    this.onStart = function(keyValue, cb){
+        cb();
+    };
+    this.onStop = function(){
+        windowResize();
     };
 };

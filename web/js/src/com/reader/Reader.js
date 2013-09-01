@@ -6,6 +6,7 @@ fm.Include("lib.parser");
 fm.Import("com.reader.controller.SourceController");
 fm.Class("Reader");
 com.reader.Reader = function (me, RegisterHash, SourceController, ActionController) {
+    'use strict';
     this.setMe = function (_me) { me = _me };
     Static.main = function () {
 		new RegisterHash();

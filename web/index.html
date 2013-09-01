@@ -17,8 +17,6 @@
         }
     </style>
     <link rel="icon" type="image/ico" href="/img/e_reader.gif" />
-    <link type="text/css" rel="stylesheet" href='/css/main.css' />
-
     <link type="text/css" rel="stylesheet" href='/css/reader.css' />
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="js/jsfm.js"></script>
@@ -29,58 +27,47 @@
     </script>
     <style type="text/css">
         .left-panel {
-            width: 15%;
+            height: 100%;
+            max-width:145px;
+            float: left;
+            font-size: 16px;
+        }
+
+        .left-panel .items{
+            padding: 5px 10px; 
+
+        }
+        .left-panel .items a{
+            line-height: 1em;
+            vertical-align: middle;
+            text-decoration: none;
+        }
+
+        .right-panel {
             height: 100%;
             float: left;
         }
 
-        .right-panel {
-            width: 85%;
-            height: 100%;
+        .right-panel .vertical-news-container{
+            cursor: pointer;
+        }
+        #sourceList, #dynamic{
             float: left;
         }
     </style>
 </head>
 <body>
     <div style="width: 100%; height: 100%;" id="main">
-        <div class="left-panel">
-            <div fm-click="clicked()" fm-controller="com.reader.controller.SourceController">
-                <div>
-                    <img src="/img/home.jpg">
-                </div>
-                <div fm-repeat="item in sources.items">
-                    <div class="items">
-                        <a fm-href="#/source/{{item.id}}">
-                            <img width=20 fm-src='/img/logos/{{item.thumbnail}}' />
-                            <span fm-hide="hideText" fm-bind="item.name"></span> 
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="left-panel" id="sourceList" >
             <br style="clear: both">
         </div>
         <div class="right-panel" id="dynamic">
         </div>
-        <div style="position:absolute;bottom:0;height: 40px;width:100%">
-            <div id="taskbar" fm-controller="com.reader.controller.ActionController"  style="height: 40px;">
-                <div class="home left-float">
-                    <a id="home">
-                        <img alt="" height="40" src="/img/home.jpg"></a>
-                        <br style="clear:both">
-                </div>
-                <div class="controlers left-float">
-                    <div>
-                        <a fm-click='increaseFont()' id="fontplus" class="plus">
-                            <img src="/img/plus-sign.jpg">
-                        </a><a fm-click='decreaseFont()' id="fontminus" class="minus">
-                            <img src="/img/minus-sign.jpg">
-                        </a>
-                        <br style="clear:both">
-                    </div>
-                </div>
-                <br style="clear:both">
-            </div>
+        <div style="width:100%" id="articleContContainer">
+        </div>
+         <div  id="taskbar" fm-controller="com.reader.controller.SettingsController"  >
+            <img fm-click="open()" src="/images/settings.jpg">
         </div>
     </div>
 </body>
-    </html>
+</html>

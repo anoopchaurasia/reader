@@ -20,7 +20,7 @@ lib.ChangeListener = function (me) {
 		return function(){
 			for (var i = 0; i < name.length; i++) {
 				var k = onList[name[i]].indexOf(fn); 
-				onList[name[k]].splice(k, 1)
+				onList[name[i]].splice(k, 1)
 			};
 		};
 	}

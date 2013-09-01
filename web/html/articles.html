@@ -1,14 +1,14 @@
-﻿<div id="article-list" style="height: 100%; width: 100%;">
+﻿<div fm-style="width:width" id="article-list" style="height: 100%; width: 100%;">
     <div class="item-item-cont" style="width: 100%; height: 100%;">
         <h2 fm-bind="articles.title"></h2>
         <div fm-directive="move()" fm-style="width:articles.items.length/3*(315+20)">
-            <div  class="vertical-news-container" fm-repeat="item in articles.items">
+            <div fm-style="width:artcle_width" class="vertical-news-container" fm-repeat="item in articles.items">
                 <div fm-click="showArticle(item.id)" class="newsSnippet" >
                     <div class="brief-title">
                         <h2 class="title" fm-bind="item.title">
                         </h2>
                     </div>
-                    <div fm-hide="!item.thumbnail" class="brief-image">
+                    <div fm-show="item.thumbnail" class="brief-image">
                         <img fm-src="{{item.thumbnail}}">
                     </div>
                     <div class="brief-body">

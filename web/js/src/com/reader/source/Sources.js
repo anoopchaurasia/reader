@@ -2,6 +2,7 @@ fm.Package("com.reader.source");
 fm.Import("com.reader.source.Source");
 fm.Class("Sources", "com.reader.abstract.ItemList");
 com.reader.source.Sources = function (base, me, Source) {
+    'use strict';
     this.setMe = function (_me) { me = _me; };
     this.Sources = function () {
         var data = [{

@@ -6,6 +6,7 @@ jfm.hash.HashChange = function (me){this.setMe=function(_me){me=_me;};
 
 	function onHashChange(){
 		var hash = location.hash.substring(1);
+		var found = false;
 		var hashArr = hash.split("/"), s, keyValue = {};
 		for(var k=0; k < me.route.length; k++){
 			s = me.route[k].path.split("/");
@@ -23,9 +24,13 @@ jfm.hash.HashChange = function (me){this.setMe=function(_me){me=_me;};
 				}
 				if(i == s.length){
 					me.onUrlChange( me.route[k], keyValue );
+					found = true;
 					break;
 				}
 			}
+		}
+		if(!found && me.defaultRoute){
+			location.hash = me.defaultRoute;
 		}
 	}
 
@@ -35,6 +40,7 @@ jfm.hash.HashChange = function (me){this.setMe=function(_me){me=_me;};
 
 	this.HashChange = function(  ) {
 		this.route = [];
+		this.defaultRoute = "";
 		window.onhashchange = onHashChange	
 	};
 };

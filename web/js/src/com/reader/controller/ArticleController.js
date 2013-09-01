@@ -1,10 +1,11 @@
+JQLite = jQuery;
 fm.Package("com.reader.controller");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
 fm.Class("ArticleController", 'com.reader.controller.MainController');
 com.reader.controller.ArticleController = function ( me, Articles, Sources, FillContent, Settings) {
-    
+ 'use strict';   
  this.setMe = function (_me) { me = _me; };
     var fontChange;
     this.onStart = function(pathInfo, cb){
@@ -12,7 +13,7 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
             me.article =articles.getById(parseInt(pathInfo.articleId) );
     	    cb();
             create(me.article.content);
-            fontChange = Settings.getInstance().on('fontSize,window-resize', function(){
+            fontChange = Settings.getInstance().on('fontSize,color_class,window-resize', function(){
                 create(me.article.content);
             });
         });
@@ -21,6 +22,7 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
     this.onStop = function(){
         $(".left-panel")[0].scrollIntoView();
         fontChange && fontChange();
+        clearTimeout(setTimeOut);
     };
 
     this.ArticleController = function  (lastState) {
@@ -28,23 +30,23 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
     };
     function getWidth(fs){
         var w = jQuery(window).width(), cw = fs*multi;
-        return Math.min(w, cw);
+        return Math.min(w-40, cw);
     }
-    multi = 18;
+    var multi = 18;
     var setTimeOut;
     function create(data){
+        data = "<h1 class='title'>"+ me.article.title +"</h1>" + data;
         var articleContainer = $("#articleContainer").empty();
         var articalWidth = getWidth(Settings.getInstance().fontSize), margins= 0;
-        articleContainer.css('fontSize', Settings.getInstance().fontSize);
+        articleContainer.parent().css('fontSize', Settings.getInstance().fontSize);
         var trancatedLength = [ 0, 1 ];
         var htm = "<div class='parent selector'><div class='s'></div></div>";
         clearTimeout(setTimeOut);
-        currentCoNumber = 1;
         var bodyHeight = window.innerHeight - articleContainer.offset().top - 10;
-        var content = new FillContent(this.content);
+        var content = new FillContent();
         var i = 0;
         function recursive( ) {
-            var removeHeight = margins + 50;
+            var removeHeight = margins + 30;
             if (trancatedLength[1] <= 0) {
                 articleContainer.append('<br style="clear:both" />');
                 return;

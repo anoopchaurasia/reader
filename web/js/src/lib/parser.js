@@ -828,10 +828,8 @@ function isArrayLike(obj) {
     // This is here for IE8: it is a bogus object treat it as array;
     return true;
   } else  {
-    return obj instanceof JQLite ||                      // JQLite
-           (jQuery && obj instanceof jQuery) ||          // jQuery
-           toString.call(obj) !== '[object Object]' ||   // some browser native object
-           typeof obj.callee === 'function';              // arguments (on IE8 looks like regular obj)
+    return (jQuery && obj instanceof jQuery) ||          // jQuery
+           toString.call(obj) !== '[object Object]' ;
   }
 }
 JQLite =jQuery;

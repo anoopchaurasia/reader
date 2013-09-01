@@ -1,0 +1,13 @@
+<div fm-style="width:settings.sourceListwidth">
+    <div>
+        <img style="max-width:100%" src="/img/home.jpg">
+    </div>
+    <div fm-repeat="item in sources.items">
+        <div class="items">
+            <a fm-href="#/source/{{item.id}}">
+                <img width=20 fm-src='/img/logos/{{item.thumbnail}}' />
+                <span fm-hide="hideText" fm-bind="item.name"></span> 
+            </a>
+        </div>
+    </div>
+</div>
