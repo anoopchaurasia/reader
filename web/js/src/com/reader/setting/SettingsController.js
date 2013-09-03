@@ -1,8 +1,8 @@
-fm.Package("com.reader.controller");
+fm.Package("com.reader.setting");
 fm.Import("jfm.html.DomManager");
 fm.Import("com.reader.setting.Settings");
 fm.Class("SettingsController", 'com.reader.controller.MainController');
-com.reader.controller.SettingsController = function (base, me, Settings, SettingsController, DomManager) {
+com.reader.setting.SettingsController = function (base, me, Settings, SettingsController, DomManager) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
 

@@ -1,13 +1,13 @@
-﻿fm.Package("com.reader.controller");
+﻿fm.Package("com.reader.source");
 fm.Import("com.reader.source.Sources");
 fm.Import( "jfm.html.DomManager");
 fm.Import("com.reader.setting.Settings");
 fm.Class("SourceController", 'com.reader.controller.MainController');
-com.reader.controller.SourceController = function (base, me, Sources, DomManager, Settings) {
+com.reader.source.SourceController = function (base, me, Sources, DomManager, Settings) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
-    var windowResize;
-    this.SourceController = function () {
+    var windowResize, dontRender;
+    this.SourceController = function (lastState) {
     	base();
         me.settings = Settings.getInstance();
         me.sources = Sources.getInstance();
@@ -22,10 +22,15 @@ com.reader.controller.SourceController = function (base, me, Sources, DomManager
         me.hideText = window.innerWidth * 15/100 < 150;
     }
 
-    this.onStart = function(keyValue, cb){
-        cb();
+    this.reRender = function(){
+        return false;
     };
-    this.onStop = function(){
+
+    this.onStart = function(keyValue, cb){
+        cb(dontRender);
+    };
+    this.onStop = function(cb){
         windowResize();
+        cb(this.sources);
     };
 };

@@ -6,9 +6,9 @@
 (function( window, isNode ) {
 
 	function getException( script, pofn ) {
-		var caller = arguments.callee.caller.caller.caller;
+		//var caller = arguments.callee.caller.caller.caller;
 		return (!this.$get && "Object cannot be created") || (script.isInterface && script.Class + ": can not initiated.")
-		        || (pofn.prototype.$get("privateConstructor") && (caller.$Class != script.Class && caller.$Class != "jfm.io.Serialize") && "Object cannot be created")
+		        //|| (pofn.prototype.$get("privateConstructor") && (caller.$Class != script.Class && caller.$Class != "jfm.io.Serialize") && "Object cannot be created")
 		        || (!this.__base___ && pofn.isAbstract && script.Class + " is an abstract class");
 	}
 

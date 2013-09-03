@@ -142,6 +142,7 @@ com.reader.controller.MainController = function(base, me, DomManager, Settings){
 	        var actionObj = $(node).data('actionObj');
         	return function(node, scope){
 	            var list = value(scope);
+                console.log(exp[2], scope.toString());
 	            var savefmRepeat = actionObj.fmRepeat;
 	            delete actionObj.fmRepeat;
 	            var newScopeC = function(){};

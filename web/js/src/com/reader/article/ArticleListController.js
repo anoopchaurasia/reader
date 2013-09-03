@@ -1,12 +1,19 @@
-fm.Package("com.reader.controller");
+fm.Package("com.reader.article");
 fm.Import("com.reader.article.Articles");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Class("ArticleListController", 'com.reader.controller.MainController');
-com.reader.controller.ArticleListController = function ( me, Articles, Settings, Sources, ArticleController) {
+com.reader.article.ArticleListController = function ( me, Articles, Settings, Sources, ArticleController) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     this.onStart = function(pathInfo, cb){
+        Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
+            me.articles = articles;
+            cb();
+        });
+    };
+
+    this.onChange = function(pathInfo, cb){
         Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
             me.articles = articles;
             cb();
@@ -100,6 +107,21 @@ com.reader.controller.ArticleListController = function ( me, Articles, Settings,
                 }
             }
             current.addClass('selected');
+            scrollIntoView(current, elem);
         });
     };
+
+    function scrollIntoView( element, elem ) {
+        elem = elem.parent().parent();
+        var containerLeft = elem.scrollLeft();
+        var containerRight = containerLeft + elem.width();
+        var elemLeft = element[0].offsetLeft - elem[0].offsetLeft;
+        var elemRight = elemLeft + element.width() + 10;
+        if (elemLeft < containerLeft) {
+            elem.scrollLeft(elemLeft);
+        }
+        else if (elemRight > containerRight) {
+            elem.scrollLeft(elemRight - elem.width());
+        }
+    }
 };

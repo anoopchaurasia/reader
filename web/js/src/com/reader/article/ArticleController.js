@@ -1,10 +1,9 @@
-JQLite = jQuery;
-fm.Package("com.reader.controller");
+fm.Package("com.reader.article");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
 fm.Class("ArticleController", 'com.reader.controller.MainController');
-com.reader.controller.ArticleController = function ( me, Articles, Sources, FillContent, Settings) {
+com.reader.article.ArticleController = function ( me, Articles, Sources, FillContent, Settings) {
  'use strict';   
  this.setMe = function (_me) { me = _me; };
     var fontChange;
@@ -20,7 +19,6 @@ com.reader.controller.ArticleController = function ( me, Articles, Sources, Fill
     };
 
     this.onStop = function(){
-        $(".left-panel")[0].scrollIntoView();
         fontChange && fontChange();
         clearTimeout(setTimeOut);
     };
