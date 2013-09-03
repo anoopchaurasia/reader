@@ -20,6 +20,7 @@ com.reader.article.ArticleController = function ( me, Articles, Sources, FillCon
 
     this.onStop = function(){
         fontChange && fontChange();
+        renderComplete(0, 0);
         clearTimeout(setTimeOut);
     };
 
@@ -46,6 +47,7 @@ com.reader.article.ArticleController = function ( me, Articles, Sources, FillCon
         function recursive( ) {
             var removeHeight = margins + 30;
             if (trancatedLength[1] <= 0) {
+                renderComplete(1, i);
                 articleContainer.append('<br style="clear:both" />');
                 return;
             }
@@ -65,23 +67,30 @@ com.reader.article.ArticleController = function ( me, Articles, Sources, FillCon
         $(document).off('keydown').on('keydown', function(e){
             var elemets = elem.find(".selector");
             current = current && current.filter(":visible").length && current || elemets.eq(0);
-            current.removeClass('selected');
+            var changed = false;
             switch(e.keyCode){
                 case 37:{
                     if(current.prev().length){
+                        current.removeClass('selected');
                         current = current.prev();
+                        changed = true;
                     }
                     break;
                 }
                 case 39:{
                      if(current.next().length && current.next()[0].nodeName !== "BR"){
+                        current.removeClass('selected');
                         current = current.next();
+                        changed = true;
                     }
                     break;
                 }
             }
-            current.addClass('selected');
-            scrollIntoView(current, elem);
+            if(changed){
+                renderComplete(current.index() + 1);
+                current.addClass('selected');
+                scrollIntoView(current, elem);
+            }
         });
     };
     function scrollIntoView( element, elem ) {
@@ -96,5 +105,13 @@ com.reader.article.ArticleController = function ( me, Articles, Sources, FillCon
         else if (elemRight > containerRight) {
             elem.scrollLeft(elemRight - elem.width());
         }
+    }
+    var total;
+    function renderComplete(page, t){
+        total = t === undefined ? total : t;
+        $(document).trigger('page_info',{
+            colNumber : page,
+            totalCol : total
+        });
     }
 };

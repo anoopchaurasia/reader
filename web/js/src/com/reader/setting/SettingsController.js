@@ -9,6 +9,12 @@ com.reader.setting.SettingsController = function (base, me, Settings, SettingsCo
 	this.SettingsController = function(settings){
 		this.settings = Settings.getInstance();
 		$('body').css(this.settings.color_class);
+		$(document).on('page_info', function(e, data){
+			me.colNumber = data.colNumber;
+			me.totalCol = data.totalCol;
+			me.callAll("change");
+		});
+		
 	};
 
 	this.open = function(){
