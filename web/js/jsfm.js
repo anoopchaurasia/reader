@@ -2,7 +2,6 @@
  * Created by JetBrains WebStorm. User: Anoop Date: 5/7/11 Time: 11:14 PM To
  * change this template use File | Settings | File Templates.
  */
-
 (function( window, isNode ) {
 
 	function getException( script, pofn ) {
@@ -242,7 +241,7 @@
 		o = createObj("" + script.packageName);
 		script.Class = "" + (script.packageName == "" ? "" : script.packageName + ".") + script.className;
 		script.Package = o;
-		
+
 		if(!isNode){
 			var temp = fm.basedir.replace(/\//gim,"");
 			if (typeof storePath[temp  + script.Class] == 'object') {
@@ -375,7 +374,7 @@
 		var arr = [];
 		for(var k in classDependent){
 			if(!classDependent[k].classObj && !fm.isExist(k)){
-			   arr.push(k); 
+			   arr.push(k);
 			}
 		}
 		return arr;
@@ -959,7 +958,7 @@
 		this.clone = function(){
 			return new (this.getClass())(this.serialize(null, true));
 		};
-		
+
 		creareSetGet(this);
 		script.ics = getAllImportClass(script.imports);
 		script.args = getAllArgsSequence(Class);

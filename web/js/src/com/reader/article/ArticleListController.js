@@ -34,6 +34,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
         me.article_height = 130;
         me.width = me.settings.window_width - me.settings.sourceListwidth;
         me.artcle_width = me.width < 300 ? me.width: 300;
+        me.verticleAlign = me.width <= 500;
     }
 
     this.ArticleListController = function  (lastState) {
