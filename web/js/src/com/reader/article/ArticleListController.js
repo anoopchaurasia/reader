@@ -64,6 +64,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
                             break;
                         }
                     }
+                    scrollIntoViewLeft(current, elem);
                     break;
                 }
                 case 38:{
@@ -76,6 +77,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
                             break;
                         }
                     }
+                    scrollIntoViewTop( current, elem )
                     break;
                 }
                 case 39:{
@@ -88,6 +90,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
                             break;
                         }
                     }
+                    scrollIntoViewLeft(current, elem);
                     break;
                 }
                 case 13:{
@@ -104,15 +107,15 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
                             break;
                         }
                     }
+                    scrollIntoViewTop( current, elem );
                     break;
                 }
             }
             current.addClass('selected');
-            scrollIntoView(current, elem);
         });
     };
 
-    function scrollIntoView( element, elem ) {
+    function scrollIntoViewLeft( element, elem ) {
         elem = elem.parent().parent();
         var containerLeft = elem.scrollLeft();
         var containerRight = containerLeft + elem.width();
@@ -123,6 +126,20 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
         }
         else if (elemRight > containerRight) {
             elem.scrollLeft(elemRight - elem.width());
+        }
+    }
+    function scrollIntoViewTop( element, elem ) {
+
+        var w_height = window.innerHeight;
+        var containerTop = 0;
+        var containerBottom = containerTop + w_height;
+        var elemTop = element[0].offsetTop;
+        var elemBottom = elemTop + element.height() + 10;
+        if (elemTop < containerTop) {
+            elem.scrollTop(elemTop);
+        }
+        else if (elemBottom > containerBottom) {
+            elem.scrollTop(elemBottom - elem.height());
         }
     }
 };

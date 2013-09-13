@@ -4,7 +4,7 @@ fm.Class("Reader", "Base");
 app.Reader = function (base, me, Base){this.setMe=function(_me){me=_me;};
 	Static.main=function(){
 		web = webPath;
-		Starter.handle(require('http').createServer().listen(8888, "127.0.0.1"));
+		Starter.handle(require('http').createServer().listen(8080, "127.0.0.1"));
 	}
 	this.method = function( req, res ) {
 		var path = __dirname + "/../../web/index.html";

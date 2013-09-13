@@ -12,10 +12,8 @@ lib.MSGesture = function () {
         elem.targetedContacts = [];           // expando on element: list of contacts that target the tabletop
         elem.topmostZ = 3;                      // expando on element: used for quicky and dirty z-reordering
 
-        elem.addEventListener("MSGestureChange", onTableTopGestureChange, false);
-        elem.addEventListener("MSGestureTap", onTableTopGestureTap, false);
+        elem.addEventListener("MSGestureStart", onTableTopGestureChange, false);
         elem.addEventListener("MSGestureEnd", onTableTopGestureEnd, false);
-        elem.addEventListener("MSGestureHold", onTableTopGestureHold, false);
 	};
 
 
