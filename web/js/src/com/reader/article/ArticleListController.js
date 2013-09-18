@@ -10,6 +10,8 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
         Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
             me.articles = articles;
             cb();
+            me.articleMove.height(window.innerHeight-me.articleMove.offset().top);
+            move(me.articleMove);
         });
     };
 
@@ -47,7 +49,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
     };
 
 
-    this.move = function(elem){
+    function move(elem){
         var current;elem = $(elem);
         $(document).off('keydown').on('keydown', function(e){
             var elemets = elem.find(".newsSnippet");
@@ -129,11 +131,9 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
         }
     }
     function scrollIntoViewTop( element, elem ) {
-
-        var w_height = window.innerHeight;
-        var containerTop = 0;
-        var containerBottom = containerTop + w_height;
-        var elemTop = element[0].offsetTop;
+        var containerTop = elem.scrollTop();
+        var containerBottom = containerTop + elem.height();
+        var elemTop = element[0].offsetTop - elem[0].offsetTop;
         var elemBottom = elemTop + element.height() + 10;
         if (elemTop < containerTop) {
             elem.scrollTop(elemTop);

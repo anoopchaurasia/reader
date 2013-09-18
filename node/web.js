@@ -6,7 +6,8 @@
  fm.Class("webPath");
  webPath = function (me) {
      Static.path = {
-        "reader" : {'class':"app.Reader"}
+        "reader" : {'class':"app.Reader"},
+        "location": {'class':"app.Location"}
     };
     Static.sources = 'web';
 };

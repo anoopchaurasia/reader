@@ -12,6 +12,7 @@ com.reader.article.ArticleController = function (me, Articles, Sources, FillCont
             me.article = articles.getById(parseInt(pathInfo.articleId));
             cb();
             create(me.article.content);
+            move(me.articleContainer);
             fontChange = Settings.getInstance().on('fontSize,color_class,window-resize', function () {
                 create(me.article.content);
             });
@@ -63,10 +64,8 @@ com.reader.article.ArticleController = function (me, Articles, Sources, FillCont
     }
 
 
-    this.move = function (elem) {
- 
+    function move(elem) {
         var current; elem = $(elem);
-     
         $(document).off('keydown swiperight swipeleft').on('keydown swiperight swipeleft', function (e, data) {
             var elemets = elem.find(".selector");
             current = current && current.filter(":visible").length && current || elemets.eq(0);

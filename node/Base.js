@@ -7,10 +7,10 @@ fm.AbstractClass("Base");
 Base = function (me){this.setMe=function(_me){me=_me;};
 
     this.Abstract.method = function(){};
-    this.POST = function(req, resp, t){
+    this.POST = function(req, resp){
        var method = req.params.method || 'method';
        var cls = this.getSub();
-       cls[method](req, resp, t);
+       cls[method](req, resp);
     };
 
     this.GET = function(req, resp){
