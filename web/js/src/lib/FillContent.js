@@ -94,21 +94,21 @@ lib.FillContent = function (me) {
 		dom.html(origHtml);
 		var step = 3;
 		var lastCharOffset = dom.htmlTruncate(from, totalChars);
-		var all = dom.find("*");
 		var decrease = 0, firstP = true;
-		var relativeHeight = dom.get(0).offsetTop + ownHeight;
-		for ( var i = 0; i < all.length; i++) {
-			if (relativeHeight < all[i].offsetTop) {
-				jQuery(all[i]).remove();
-			}
-			else if(all[i].nodeName != 'BR' && jQuery(all[i]).text() == ""){
-				 jQuery(all[i]).remove();
-			}
-			else if(firstP && all[i].nodeName == "P" ){
-				$(all[i]).css("margin-top","0px");
-				firstP = false;
-			}
-		}
+		//var relativeHeight = dom.get(0).offsetTop + ownHeight;
+		//var all = dom.find("*");
+		// for ( var i = 0; i < all.length; i++) {
+		// 	if (relativeHeight < all[i].offsetTop) {
+		// 		jQuery(all[i]).remove();
+		// 	}
+		// 	else if(all[i].nodeName != 'BR' && jQuery(all[i]).text() == ""){
+		// 		 jQuery(all[i]).remove();
+		// 	}
+		// 	else if(firstP && all[i].nodeName == "P" ){
+		// 		$(all[i]).css("margin-top","0px");
+		// 		firstP = false;
+		// 	}
+		// }
 		var totalLen = lastCharOffset[1];
 		var count = 0;
 		var diff = dom.get(0).scrollHeight - ownHeight;

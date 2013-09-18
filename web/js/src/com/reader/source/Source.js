@@ -23,7 +23,7 @@ com.reader.source.Source = function (me, Articles) {
     };
 
     function loadData (url, cb) {
-        url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=?&q=' + encodeURIComponent(url);
+        url = 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=9&callback=?&q=' + encodeURIComponent(url);
         var temp = (window.WinJS && window.WinJS.xhr) || jQuery.ajax;
         temp({ url: url, dataType:'json', responseType:'json' }).done(
         function fulfilled(result) {
