@@ -37,7 +37,7 @@ lib.FillContent = function (me) {
 														// only thats why we
 														// need tags
 		}
-		
+
 		if (myStr.length > max) {
 			var c;
 			while (max > 0) {
@@ -74,7 +74,7 @@ lib.FillContent = function (me) {
 		return [ max + 1, totalLen ];
 	};
 	function charsPerLine( dom ) {
-		
+
 		var target_width = dom.width(); // line width
 		var text = 'I want to know how many chars of this text fit.';
 		var span = document.createElement('span');
@@ -108,18 +108,17 @@ lib.FillContent = function (me) {
 				lastCharOffset[0] = 0;
 				break;
 			}
-			if (count > 100) {
+			if (count > 20) {
 				break;
 			}
 			count++;
 			diff = dom.get(0).scrollHeight - ownHeight;
 			decrease = Math.floor((diff / lineHeight -1 ) * cpl / 1.7);
-			if (decrease <= 0) {
+			if (decrease <= step) {
 				decrease = step;
 			}
 		}
-		dom.html(dom.html().replace(/<\/a>/mgi, "</a> "));
- 	//	console.log(count);
+		dom.html( dom.html().replace(/<\/a>/mgi, "</a> "));
 		return [ from + lastCharOffset[0], totalLen - from - lastCharOffset[0] ];
 	};
 	this.FillContent = function( ) {
