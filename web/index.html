@@ -20,9 +20,8 @@
     <link rel="icon" type="image/ico" href="/img/home.jpg" />
     <link type="text/css" rel="stylesheet" href='/css/reader.css' />
     <script type="text/javascript" src="/js/jquery.js"></script>
-        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
-    <script type="text/javascript" src="js/jsfm.js"></script>
+    <script type="text/javascript" src="/js/jquery-swipe.js"></script>
+    <script type="text/javascript" src="jsfm.js"></script>
     <script>
         fm.basedir = '/js/src';
         fm.Include("com.reader.Reader");
@@ -77,9 +76,7 @@
     <div style="width: 100%; height: 100%;" id="main">
         <div id="view">
         </div>
-         <div  id="taskbar" fm-controller="com.reader.setting.SettingsController"  >
-            <img class="setting" fm-click="open()" src="/img/settings.jpg">
-            <span fm-hide="!totalCol" style="margin-left:45%"><span fm-bind="colNumber"></span>/<span fm-bind="totalCol"></span></span>
+        <div id="taskmanager">
         </div>
     </div>
 </body>

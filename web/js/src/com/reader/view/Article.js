@@ -1,6 +1,6 @@
 fm.Package("com.reader.view");
 fm.Import("com.reader.article.ArticleController");
-fm.Class("Article", "com.reader.view.View");
+fm.Class("Article", "jfm.dom.View");
 com.reader.view.Article = function(base, me, ArticleController){
 	this.setMe=function(_me){me=_me};
 	this.Article = function(){
@@ -10,6 +10,11 @@ com.reader.view.Article = function(base, me, ArticleController){
                 controller: ArticleController,
                 template: '/html/article.html',
                 container : '#articleContContainer'
+            },
+            {
+                controller: com.reader.setting.SettingsController,
+                template: "/html/taskmanager.html",
+                container: "#taskmanager"
             }
         ];
 	};

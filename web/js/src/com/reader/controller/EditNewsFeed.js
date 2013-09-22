@@ -1,23 +1,23 @@
-fm.Package("com.reader.source");
-fm.Import("com.reader.source.Source");
-fm.Class("Sources", "com.reader.abstract.ItemList");
-com.reader.source.Sources = function (base, me, Source) {
+fm.Package("com.reader.controller");
+fm.Class("EditNewsFeed", 'jfm.dom.Controller');
+com.reader.controller.EditNewsFeed = function (base, me) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
-    this.Sources = function () {
-        var data = [];
+
+    this.EditNewsFeed = function () {
+        this.FeedList = [];
         try{
-            data = JSON.parse(localStorage.selecteFeedSource || undefined) || [];
+            this.FeedList = JSON.parse(localStorage.selecteFeedSource || undefined) || [];
         }catch(e){
-            data = [{
+            this.FeedList = [{
                 id: 1,
-    	        url : "http://feeds.mashable.com/Mashable",
-    	        name : "Mashable",
+                url : "http://feeds.mashable.com/Mashable",
+                name : "Mashable",
                 thumbnail: "mashable.jpg"
             }, {
                 id: 2,
-    	        url : "http://feeds.feedburner.com/fakingnews",
-    	        name : "Faking News",
+                url : "http://feeds.feedburner.com/fakingnews",
+                name : "Faking News",
                 thumbnail:"fakingnews.jpg"
             }, {
                 id: 3,
@@ -45,20 +45,18 @@ com.reader.source.Sources = function (base, me, Source) {
                 selected : true,
                 name : "Tech Crunch",
                 thumbnail: 'techcrunch.jpg'
-    	    }];
+            }];
         }
-	    base(data, Source);
-    }
-
-    this.getArticles = function(id, cb){
-        return this.getById(id).getArticles(cb);
     };
 
-    var instance;
-    Static.getInstance = function () {
-        if (!instance) {
-            instance = new com.reader.source.Sources();
-        }
-        return instance;
+    this.domchange = function(){
+        
+        localStorage.selecteFeedSource = JSON.stringify(this.FeedList);
+    };
+
+    this.onStart = function(keys, cb){
+        cb();
     }
-}
+    this.onStop = function(keys, cb){
+    }
+};

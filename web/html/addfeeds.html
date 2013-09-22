@@ -1,0 +1,11 @@
+<div>
+	<form>
+		<ul>
+			<li fm-repeat="feed in FeedList">
+				<label>
+					<input type=checkbox fm-value="feed.inlist" />
+					<span fm-bind="feed.name"></span>
+			</li>
+		</ul>
+	</form>
+</div>

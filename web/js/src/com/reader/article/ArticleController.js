@@ -2,7 +2,7 @@ fm.Package("com.reader.article");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
-fm.Class("ArticleController", 'com.reader.controller.MainController');
+fm.Class("ArticleController", 'jfm.dom.Controller');
 com.reader.article.ArticleController = function (me, Articles, Sources, FillContent, Settings) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
@@ -11,12 +11,16 @@ com.reader.article.ArticleController = function (me, Articles, Sources, FillCont
         Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function (articles) {
             me.article = articles.getById(parseInt(pathInfo.articleId));
             cb();
-            create(me.article.content);
-            move(me.articleContainer);
+
             fontChange = Settings.getInstance().on('fontSize,color_class,window-resize', function () {
                 create(me.article.content);
             });
         });
+    };
+
+    this.afterRender = function(){
+        create(me.article.content);
+        move(me.articleContainer);
     };
 
     this.onStop = function () {
@@ -103,10 +107,10 @@ com.reader.article.ArticleController = function (me, Articles, Sources, FillCont
         var elemLeft = element[0].offsetLeft - elem[0].offsetLeft;
         var elemRight = elemLeft + element.width() + 10;
         if (elemLeft < containerLeft) {
-            elem.scrollLeft(elemLeft);
+            elem.animate({scrollLeft:elemLeft});
         }
         else if (elemRight > containerRight) {
-            elem.scrollLeft(elemRight - elem.width());
+            elem.animate({scrollLeft:elemRight - elem.width()} );
         }
     }
     var total;

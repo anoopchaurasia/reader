@@ -2,24 +2,27 @@ fm.Package("com.reader.article");
 fm.Import("com.reader.article.Articles");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
-fm.Class("ArticleListController", 'com.reader.controller.MainController');
+fm.Class("ArticleListController", 'jfm.dom.Controller');
 com.reader.article.ArticleListController = function ( me, Articles, Settings, Sources, ArticleController) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     this.onStart = function(pathInfo, cb){
-        Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
+         Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function(articles){
             me.articles = articles;
             cb();
-            me.articleMove.height(window.innerHeight-me.articleMove.offset().top);
-            move(me.articleMove);
-        });
+         });
     };
 
+    this.afterRender = function(){
+        me.articleMove.height(window.innerHeight-me.articleMove.offset().top);
+        move(me.articleMove);
+    }
+
     this.onChange = function(pathInfo, cb){
-        Sources.getInstance().getArticles(parseInt(pathInfo.id), function(articles){
+         Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function(articles){
             me.articles = articles;
             cb();
-        });
+         });
     };
 
     var windowResize;
