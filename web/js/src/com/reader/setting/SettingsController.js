@@ -9,9 +9,9 @@ com.reader.setting.SettingsController = function (base, me, Settings, SettingsCo
 		this.settings = Settings.getInstance();
 		$('body').css(this.settings.color_class);
 		$(document).on('page_info', function(e, data){
-			me.colNumber = data.colNumber;
-			me.totalCol = data.totalCol;
-			me.callAll("change");
+			$("#taskbar").css("visibility", "visible");
+			me.colNumber.text(data.colNumber);
+			me.totalCol.text(data.totalCol);
 		});
 	};
 
@@ -19,9 +19,7 @@ com.reader.setting.SettingsController = function (base, me, Settings, SettingsCo
 		cb();
 	};
 
-	this.onStop = function(){
-
-	};
+	this.onStop = function(){};
 
 	this.open = function(){
 		this.createDom('/html/settings.html',function(dom){

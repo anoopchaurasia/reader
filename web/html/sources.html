@@ -6,7 +6,7 @@
     <div fm-repeat="item in sources.items">
         <div class="items">
             <a fm-href="#/source/{{item.id}}">
-                <img width=20 fm-src='/img/logos/{{item.thumbnail}}' />
+                <img width=20 fm-src='{{item.thumbnail}}' />
                 <span fm-hide="hideText" fm-bind="item.name"></span> 
             </a>
         </div>

@@ -4,7 +4,9 @@
 			<li fm-repeat="feed in FeedList">
 				<label>
 					<input type=checkbox fm-value="feed.inlist" />
+                	<img width=20 fm-src='{{feed.thumbnail}}' />
 					<span fm-bind="feed.name"></span>
+				</label>
 			</li>
 		</ul>
 	</form>
