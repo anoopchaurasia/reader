@@ -1,6 +1,6 @@
 fm.Package('lib');
 fm.Class("Utility");
-lib.Utility = function (me) {
+lib.Utility = function (me){this.setMe=function(_me){me=_me;};
 	var myRegEx = /<\/?[^<>]*\/?>/gim;
 	Static.stripHTML = function (htmlStr) {
 		var html = $("<div>"+htmlStr+"</div>");

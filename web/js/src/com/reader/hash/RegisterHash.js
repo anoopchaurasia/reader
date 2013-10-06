@@ -5,7 +5,7 @@ fm.Import("com.reader.view.EditFeed");
 fm.Import("com.reader.view.NewsList");
 fm.Import("com.reader.view.Article");
 fm.Class("RegisterHash","jfm.hash.HashChange");
-com.reader.hash.RegisterHash = function(base, me, EditFeed, Article, Home, NewsList){this.setMe=function(_me){me=_me};
+com.reader.hash.RegisterHash = function (base, me, SettingsController, Home, EditFeed, NewsList, Article, HashChange){this.setMe=function(_me){me=_me;};this.setMe=function(_me){me=_me};
     'use strict';
     var lastState = {}; 
     this.RegisterHash = function () {

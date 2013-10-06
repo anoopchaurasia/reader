@@ -1,7 +1,7 @@
 fm.Package("com.reader.article");
 fm.Import('lib.Utility');
 fm.Class("Article");
-com.reader.article.Article = function (me, Utility) {	this.setMe=function(_me){me=_me};
+com.reader.article.Article = function (me, Utility){this.setMe=function(_me){me=_me;};	this.setMe=function(_me){me=_me};
 	'use strict';
 	this.Article = function (article, index) {
 		this.title = article.title;

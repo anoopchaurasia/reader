@@ -1,7 +1,7 @@
 fm.Package("com.reader.setting");
 fm.Import("com.reader.setting.Settings");
 fm.Class("SettingsController", 'jfm.dom.Controller');
-com.reader.setting.SettingsController = function (base, me, Settings, SettingsController) {
+com.reader.setting.SettingsController = function (base, me, Settings, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
 

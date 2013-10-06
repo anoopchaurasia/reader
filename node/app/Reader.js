@@ -8,7 +8,7 @@ app.Reader = function (base, me, Base){this.setMe=function(_me){me=_me;};
 		Starter.handle(require('http').createServer().listen(8080, "localhost"));
 	}
 	this.method = function( req, res ) {
-		var path = __dirname + "/../../web/index.html";
+		var path =  "C:\\Users\\anoop\\Documents\\Visual Studio 2012\\Projects\\wpreader\\HTML5App1\\Html\\index.html";
 		require('fs').readFile(path, function( err, data ) {
 			if (err) {
 
@@ -22,6 +22,35 @@ app.Reader = function (base, me, Base){this.setMe=function(_me){me=_me;};
 				res.end();
 			}
 		});
+	};
+
+	this.getFeed = function(req,resp){
+
+		var options = {
+				host: 'cloud.feedly.com'
+			  , port: 80
+			  , path: '/v3/search/feeds?n=15&q=' + req.params.query_data
+		};
+		console.log("fghj");
+		var request = require("http").get(options, function(res){
+			var imagedata = ''
+			resp.setHeader("Content-Type",'application/json');
+			res.on('data', function(chunk){
+				imagedata += chunk;
+			});
+
+			res.on('end', function(){
+				resp.write(imagedata);
+				resp.end("\n");
+			})
+		});
+		console.log("fghj");
+		request.on('error', function(e) {
+		  console.log('problem with request: ' + e.message);
+		  resp.end();
+		});
+		request.end();
+		console.log("fghj");
 	};
 
 	this.getArticles = function(req, resp){

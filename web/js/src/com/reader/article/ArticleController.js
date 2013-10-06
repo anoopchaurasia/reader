@@ -3,7 +3,7 @@ fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Import("lib.FillContent")
 fm.Class("ArticleController", 'jfm.dom.Controller');
-com.reader.article.ArticleController = function (me, Articles, Sources, FillContent, Settings) {
+com.reader.article.ArticleController = function (base, me, Sources, Settings, FillContent, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     var fontChange;

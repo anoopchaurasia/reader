@@ -3,23 +3,25 @@ fm.Import("com.reader.article.Articles");
 fm.Import("com.reader.source.Sources");
 fm.Import("com.reader.setting.Settings");
 fm.Class("ArticleListController", 'jfm.dom.Controller');
-com.reader.article.ArticleListController = function ( me, Articles, Settings, Sources, ArticleController) {
+com.reader.article.ArticleListController = function (base, me, Articles, Sources, Settings, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
-    this.onStart = function(pathInfo, cb){
-         Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function(articles){
+    this.onStart = function(pathinfo, cb){
+        pathid = parseInt(pathinfo.sourceId);
+        Sources.getInstance().getArticles(pathid, function(articles){
             me.articles = articles;
             cb();
-         });
+        });
     };
 
     this.afterRender = function(){
         me.articleMove.height(window.innerHeight-me.articleMove.offset().top);
         move(me.articleMove);
     }
-
-    this.onChange = function(pathInfo, cb){
-         Sources.getInstance().getArticles(parseInt(pathInfo.sourceId), function(articles){
+    var pathid;
+    this.onChange = function(pathinfo, cb){
+        pathid = parseInt(pathinfo.sourceId);
+         Sources.getInstance().getArticles(pathid, function(articles){
             me.articles = articles;
             cb();
          });
@@ -29,6 +31,7 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
 
     this.onStop = function(){
         windowResize();
+        me.articleMove.parent().scrollTop(0);
     };
     
     this.showArticle = function (articleId) {
@@ -54,70 +57,24 @@ com.reader.article.ArticleListController = function ( me, Articles, Settings, So
 
     function move(elem){
         var current;elem = $(elem);
-        $(document).off('keydown').on('keydown', function(e){
+        $(document).off('swipeleft swiperight').on('swipeleft swiperight', function(e){
             var elemets = elem.find(".newsSnippet");
             current = current || elemets.eq(0);
             current.removeClass('selected');
-            switch(e.keyCode){
-                case 37:{
-                    var top = current.offset().top, i=0, index = elemets.index(current);
-                    while(i < elemets.length){
-                        i++;
-                        index--;
-                        current = elemets.eq( (index + elemets.length)%elemets.length );
-                        if( top === current.offset().top ){
-                            break;
-                        }
-                    }
-                    scrollIntoViewLeft(current, elem);
+            switch(e.type){
+                case 'swipeleft':{
+                    var id = Sources.getInstance().next(parseInt(pathid));
+                    location.hash = location.hash.replace(/(\d*?)$/m, id);;
                     break;
                 }
-                case 38:{
-                    var left = current.offset().left, i=0, index = elemets.index(current);
-                    while(i < elemets.length){
-                        i++;
-                        index--;
-                        current = elemets.eq( (index + elemets.length)%elemets.length );
-                        if(left === current.offset().left){
-                            break;
-                        }
-                    }
-                    scrollIntoViewTop( current, elem )
-                    break;
-                }
-                case 39:{
-                    var top = current.offset().top, i=0, index = elemets.index(current);
-                    while(i < elemets.length){
-                        i++;
-                        index++;
-                        current = elemets.eq( (index + elemets.length)%elemets.length );
-                        if( top === current.offset().top ){
-                            break;
-                        }
-                    }
-                    scrollIntoViewLeft(current, elem);
-                    break;
-                }
-                case 13:{
-                    current.click();
-                    break;
-                }
-                case 40:{
-                    var left = current.offset().left, i=0, index = elemets.index(current);
-                    while(i < elemets.length){
-                        i++;
-                        index++;
-                        current = elemets.eq( (index + elemets.length)%elemets.length );
-                        if(left === current.offset().left){
-                            break;
-                        }
-                    }
-                    scrollIntoViewTop( current, elem );
+                case 'swiperight':{
+                     var id = Sources.getInstance().prev(parseInt(pathid));
+                    
+                    location.hash = location.hash.replace(/(\d*?)$/m, id);;
                     break;
                 }
             }
-            current.addClass('selected');
-        });
+         });
     };
 
     function scrollIntoViewLeft( element, elem ) {

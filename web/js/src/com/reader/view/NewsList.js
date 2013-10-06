@@ -2,7 +2,7 @@ fm.Package("com.reader.view");
 fm.Import("com.reader.source.SourceController");
 fm.Import("com.reader.article.ArticleListController");
 fm.Class("NewsList", "jfm.dom.View");
-com.reader.view.NewsList = function(base, me, SourceController, ArticleListController){
+com.reader.view.NewsList = function (base, me, SourceController, ArticleListController, View){this.setMe=function(_me){me=_me;};
 	this.setMe=function(_me){me=_me};
 	this.NewsList = function(){
 		this.url = '/html/newslist.view.html';

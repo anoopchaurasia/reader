@@ -1,6 +1,6 @@
 ﻿fm.Package("com.reader.abstract");
 fm.AbstractClass("ItemList");
-com.reader.abstract.ItemList = function (me) {
+com.reader.abstract.ItemList = function (me){this.setMe=function(_me){me=_me;};
     'use strict';
     this.setMe = function (_me) { me = _me };
     this.ItemList = function (items, type) {

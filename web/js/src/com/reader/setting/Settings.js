@@ -1,6 +1,6 @@
 fm.Package("com.reader.setting");
 fm.Class("Settings", "jfm.dom.ChangeListener");
-com.reader.setting.Settings = function(base, me){
+com.reader.setting.Settings = function (base, me, ChangeListener){this.setMe=function(_me){me=_me;};
 	'use strict';
 	this.setMe = function (_me) { me = _me };
 	

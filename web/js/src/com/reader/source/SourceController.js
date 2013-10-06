@@ -2,7 +2,7 @@
 fm.Import("com.reader.source.Sources");
  fm.Import("com.reader.setting.Settings");
 fm.Class("SourceController", 'jfm.dom.Controller');
-com.reader.source.SourceController = function (base, me, Sources, Settings) {
+com.reader.source.SourceController = function (base, me, Sources, Settings, Controller) {
     'use strict';
     this.setMe = function (_me) { me = _me; };
     var windowResize, dontRender;

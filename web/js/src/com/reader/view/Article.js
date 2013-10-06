@@ -1,7 +1,7 @@
 fm.Package("com.reader.view");
 fm.Import("com.reader.article.ArticleController");
 fm.Class("Article", "jfm.dom.View");
-com.reader.view.Article = function(base, me, ArticleController){
+com.reader.view.Article = function (base, me, ArticleController, View){this.setMe=function(_me){me=_me;};
 	this.setMe=function(_me){me=_me};
 	this.Article = function(){
         this.url = '/html/article.view.html';
